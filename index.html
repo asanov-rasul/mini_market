@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Market</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>🛒 Mini Market</h1>
+
+        <div class="panel">
+            <h2>Добавить товар</h2>
+
+            <form class="form" id="productForm">
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="Название товара"
+                    required
+                >
+
+                <input
+                    type="number"
+                    id="productPrice"
+                    placeholder="Цена"
+                    min="1"
+                    required
+                >
+
+                <select id="productCategory" required>
+                    <option value="">Выберите категорию</option>
+                    <option value="electronics">Электроника</option>
+                    <option value="clothes">Одежда</option>
+                    <option value="food">Еда</option>
+                </select>
+
+                <input
+                    type="number"
+                    id="productStock"
+                    placeholder="Количество на складе"
+                    min="0"
+                    required
+                >
+
+                <button type="submit">Добавить товар</button>
+            </form>
+        </div>
+
+        <div class="panel">
+            <h2>Каталог</h2>
+
+            <div class="filters">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Поиск товара..."
+                >
+
+                <select id="categoryFilter">
+                    <option value="all">Все категории</option>
+                    <option value="electronics">Электроника</option>
+                    <option value="clothes">Одежда</option>
+                    <option value="food">Еда</option>
+                </select>
+            </div>
+
+            <p class="status" id="status">
+                Готов к работе
+            </p>
+
+            <div class="products" id="products"></div>
+        </div>
+
+        <!-- Иконка корзины -->
+        <button class="cart-toggle" id="cartToggle">
+            🛒
+            <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <!-- Затемнение фона -->
+        <div class="cart-overlay" id="cartOverlay"></div>
+
+        <!-- Боковая панель корзины -->
+        <aside class="cart-sidebar" id="cartSidebar">
+
+            <div class="cart-header">
+                <h2>🛒 Моя корзина</h2>
+                <button class="cart-close" id="cartClose">&times;</button>
+            </div>
+
+            <!-- Список товаров -->
+            <div class="cart-items" id="cartItems">
+                
+            </div>
+
+            <!-- Итоговая стоимость -->
+            <div class="cart-footer">
+
+                <div class="cart-total">
+                    <span>Итого:</span>
+                    <strong id="cartTotal"></strong>
+                </div>
+
+                <button class="checkout-btn">
+                    Оформить заказ
+                </button>
+
+            </div>
+
+        </aside>
+
+        <div class="modal-overlay">
+            <div class="modal">
+
+                <div class="modal-header">
+                    <h2>Редактировать товар</h2>
+                    <button class="close-btn">&times;</button>
+                </div>
+
+                <form class="edit-form">
+
+                    <div class="form-group">
+                        <label for="editName">Название товара</label>
+                        <input
+                            type="text"
+                            id="editName"
+                            value="Беспроводные наушники"
+                            placeholder="Введите название"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editPrice">Цена ($)</label>
+                        <input
+                            type="number"
+                            id="editPrice"
+                            value="120"
+                            placeholder="Введите цену"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editCategory">Категория</label>
+                        <select id="editCategory">
+                            <option value="electronics" selected>Электроника</option>
+                            <option value="clothes">Одежда</option>
+                            <option value="food">Еда</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editStock">Количество на складе</label>
+                        <input
+                            type="number"
+                            id="editStock"
+                            value="5"
+                            placeholder="Введите количество"
+                        >
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="button" class="cancel-btn">
+                            Отмена
+                        </button>
+
+                        <button type="submit" class="save-btn">
+                            Сохранить изменения
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="success-overlay" id="successModal">
+
+            <div class="success-modal">
+
+                <button class="success-close" id="successClose">
+                    &times;
+                </button>
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>Заказ успешно оформлен!</h2>
+
+                <p class="success-description">
+                    Спасибо за покупку! Ваш заказ успешно принят.
+                </p>
+
+                <div class="order-info">
+                    <p>Номер заказа:</p>
+                    <strong>#MM-20261105</strong>
+                </div>
+
+                <p class="success-note">
+                    Мы скоро свяжемся с вами для подтверждения заказа.
+                </p>
+
+                <button class="success-button" id="successButton">
+                    Продолжить покупки
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
