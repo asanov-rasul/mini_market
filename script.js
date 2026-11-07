@@ -306,7 +306,7 @@ successModal.addEventListener('click', (e) => {
 
 async function sendOrder() {
     try {
-        const response = await fetch('mail.php', {
+        const response = await fetch('./mail.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -316,7 +316,12 @@ async function sendOrder() {
             })
         });
 
-        const result = await response.json();
+        const text = await response.text();
+
+        console.log('HTTP Status:', response.status);
+        console.log('Ответ сервера:', text);
+
+        const result = JSON.parse(text);
 
         if (result.success) {
             alert('Заказ успешно отправлен!');
@@ -325,7 +330,7 @@ async function sendOrder() {
         }
 
     } catch (error) {
-        console.error(error);
-        alert('Ошибка соединения с сервером');
+        console.error('Ошибка:', error);
+        alert('Ошибка: ' + error.message);
     }
 }
