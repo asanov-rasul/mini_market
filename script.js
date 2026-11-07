@@ -291,6 +291,7 @@ checkoutBtn.addEventListener('click', () => {
     if (cartList.length == 0) return
     successModal.style.display = 'flex'
     document.querySelector('.order-nomer').textContent = `#MM-${Date.now()}`
+    sendOrder()
 })
 
 function closeSuccessModal() {
