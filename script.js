@@ -306,7 +306,7 @@ successModal.addEventListener('click', (e) => {
 
 async function sendOrder() {
     try {
-        const response = await fetch('./mail.php', {
+        const response = await fetch('https://mini-market-backend-b0vt.onrender.com/mail.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
