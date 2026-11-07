@@ -281,3 +281,50 @@ cartItems.addEventListener('click', (e) => {
         })
     }
 })
+
+// Оформление заказа
+
+const successModal = document.querySelector('#successModal')
+const checkoutBtn = document.querySelector('.checkout-btn')
+
+checkoutBtn.addEventListener('click', () => {
+    if (cartList.length == 0) return
+    successModal.style.display = 'flex'
+    document.querySelector('.order-nomer').textContent = `#MM-${Date.now()}`
+})
+
+function closeSuccessModal() {
+    successModal.style.display = 'none'
+    cartList = []
+    renderCartProducts(cartList)
+}
+
+successModal.addEventListener('click', (e) => {
+    if (e.target.classList.contains('success-overlay') || e.target.classList.contains('success-close') || e.target.classList.contains('success-button')) closeSuccessModal()
+})
+
+async function sendOrder() {
+    try {
+        const response = await fetch('mail.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                products: cartList
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('Заказ успешно отправлен!');
+        } else {
+            alert(result.message);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert('Ошибка соединения с сервером');
+    }
+}
